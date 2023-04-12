@@ -11,8 +11,13 @@
 	<groupId>com.example</groupId>
 	<artifactId>TravelMate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>TravelMate</name>
 	<description>Demo project for Spring Boot</description>
+	<modules>
+		<module>travel-mate-data</module>
+		<module>travel-mate-web</module>
+	</modules>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
