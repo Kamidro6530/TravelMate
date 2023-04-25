@@ -12,3 +12,5 @@ alter table roles drop index UK_ofx66keruapi6vyqpv6f2or37;
 alter table roles add constraint UK_ofx66keruapi6vyqpv6f2or37 unique (name);
 alter table users_role add constraint FKeejqlb4gq1av9540jg66ju2pi foreign key (role_id) references roles (id);
 alter table users_role add constraint FKqpe36jsen4rslwfx5i6dj2fy8 foreign key (user_id) references users (id);
+insert into roles(name) values ('ADMIN');
+insert into roles(name) values ('USER');
