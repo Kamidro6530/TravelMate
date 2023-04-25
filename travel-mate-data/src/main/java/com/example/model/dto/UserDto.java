@@ -15,6 +15,8 @@ public class UserDto extends BaseDto{
 
     private String password;
 
+    private String username;
+
     private LocalDate birthDate;
 
     private Set<Itineraries> itineraries;
