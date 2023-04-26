@@ -1,17 +1,19 @@
 package com.example.model.dto;
 
 import com.example.model.Itineraries;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.Set;
 
+@Data
 public class UserDto extends BaseDto{
 
     private String firstName;
 
     private String lastName;
 
-    private String eMail;
+    private String email;
 
     private String password;
 
