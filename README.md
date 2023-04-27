@@ -1,6 +1,6 @@
 # TravelMate 🗺️✈️
-Project Description:
-JourneyPlanner is a web-based application that allows users to plan and organize their trips.
+
+TravelMate is a web-based application that allows users to plan and organize their trips.
 The application allows users to search for travel destinations, create itineraries, and save their plans.
 It also provides users with useful information about their destinations such as weather, currency, and popular tourist attractions. 🌴🌊🌞
 
