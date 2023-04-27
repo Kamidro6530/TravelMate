@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Builder
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -39,4 +39,19 @@ public class User extends BaseEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @Builder
+    public User(Long id,String username,String firstName,String lastName,
+                String email,String password,LocalDate birthDate,Set<Itineraries> itineraries,Set<Role> roles){
+        super(id);
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.birthDate = birthDate;
+        this.itineraries = itineraries;
+        this.roles = roles;
+
+    }
 }

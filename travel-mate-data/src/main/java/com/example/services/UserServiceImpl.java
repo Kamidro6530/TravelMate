@@ -8,8 +8,8 @@ import com.example.model.repositories.RoleRepository;
 import com.example.model.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
 
@@ -26,24 +26,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(UserDto userDto) {
+    public User save(User user) {
 
-        Role role = getRoleUSER();
-
-        userRepository.save(mapToUser(userDto,Set.of(role)));
+        return userRepository.save(user);
     }
 
     @Override
-    public UserDto findById(Long id) {
-        return mapToUserDto(userRepository.findById(id).orElse(null));
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Set<UserDto> findAll() {
-      return userRepository.findAll()
-              .stream()
-              .map(this::mapToUserDto)
-              .collect(Collectors.toSet());
+    public Set<User> findAll() {
+        return new HashSet<>(userRepository.findAll());
     }
 
     @Override
@@ -52,8 +47,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(UserDto userDto) {
-        userRepository.delete(mapToUser(userDto,Set.of(getRoleUSER())));
+    public void delete(User user) {
+        userRepository.delete(user);
     }
 
     @Override
@@ -71,33 +66,23 @@ public class UserServiceImpl implements UserService {
         return mapToUserDto(userRepository.findByLastName(lastname));
     }
 
-    private Role getRoleUSER(){
+    private Role getRoleUSER() {
         Role role = roleRepository.findByName(EnumRole.USER);
-        if (role == null){
+        if (role == null) {
             roleRepository.save(Role.builder().name(EnumRole.USER.name()).build());
         }
         return role;
     }
 
-    private UserDto mapToUserDto(User user) {
-        UserDto userDto = new UserDto();
-             userDto.setFirstName(user.getFirstName());
-             userDto.setLastName(user.getLastName());
-             userDto.setEmail(user.getEmail());
-             userDto.setBirthDate(user.getBirthDate());
-             userDto.setUsername(user.getUsername());
-        return userDto;
-    }
 
-    private User mapToUser(UserDto userDto,Set<Role> roles) {
-       return User.builder()
-                .firstName(userDto.getFirstName())
-                .lastName(userDto.getLastName())
-                .email(userDto.getEmail())
-                .password(passwordEncoder.encode(userDto.getPassword()))
-                .birthDate(userDto.getBirthDate())
-                .username(userDto.getUsername())
-                .roles(roles)
+    private UserDto mapToUserDto(User user) {
+        return UserDto.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .birthDate(user.getBirthDate())
+                .username(user.getUsername())
                 .build();
     }
+
 }
