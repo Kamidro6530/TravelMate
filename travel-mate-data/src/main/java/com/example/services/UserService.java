@@ -1,7 +1,6 @@
 package com.example.services;
 
 import com.example.model.User;
-import com.example.model.dto.UserDto;
 
 import java.util.Set;
 
@@ -16,10 +15,10 @@ public interface UserService {
 
     void delete(User object);
 
-    UserDto findUserByEmail(String email);
+    User findUserByEmail(String email);
 
-    UserDto findUserByUsername(String username);
+    User findUserByUsername(String username);
 
-    UserDto findUserByLastname(String lastname);
+    User findUserByLastname(String lastname);
 
 }
