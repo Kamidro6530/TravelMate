@@ -31,7 +31,7 @@ public class AuthController {
             return "error";
         }else {
             User savedUser = userService.save(user);
-            return "redirect:/index/";
+            return "redirect:/index";
         }
     }
 
