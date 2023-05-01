@@ -5,8 +5,6 @@ import com.example.model.User;
 import java.util.Set;
 
 public interface UserService {
-
-    User registerNewUserAccount(User user);
     User save(User object);
 
     User findById(Long id);

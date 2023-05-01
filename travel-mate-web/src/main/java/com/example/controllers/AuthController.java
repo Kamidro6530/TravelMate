@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import com.example.model.User;
 import com.example.services.UserService;
+import com.example.services.UserValidateService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthController {
 
    private final UserService userService;
+   private final UserValidateService userValidateService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, UserValidateService userValidateService) {
         this.userService = userService;
+        this.userValidateService = userValidateService;
     }
 
     @RequestMapping("/register")
@@ -27,10 +30,12 @@ public class AuthController {
 
     @PostMapping("register/save")
     public String registrationNewUser(@Valid User user, BindingResult result){
+        userValidateService.validateEmailExist(user,result);
+        userValidateService.validatePasswords(user,result);
         if (result.hasErrors()){
-            return "redirect:/register";
+            return "authorization/register";
         }else {
-            userService.registerNewUserAccount(user);
+            userService.save(user);
             return "redirect:/index";
         }
     }

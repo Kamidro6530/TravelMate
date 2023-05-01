@@ -56,7 +56,8 @@
                                 type="text"
                         />
                         <p th:errors = "*{firstName}" class="text-danger"
-                           th:if="${#fields.hasErrors('firstName')}"></p>
+                           th:if="${#fields.hasErrors('firstName')}"
+                        ></p>
                     </div>
 
                     <div class="form-group mb-3">

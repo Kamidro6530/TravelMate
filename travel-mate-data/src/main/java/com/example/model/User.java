@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.springframework.validation.Errors;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -64,12 +63,6 @@ public class User extends BaseEntity {
         this.itineraries = itineraries;
         this.roles = roles;
 
-    }
-
-    public void validatePasswords(Errors errors) {
-        if (!this.password.equals(this.confirmPassword)) {
-            errors.rejectValue("confirmPassword", "password.mismatch", "Passwords do not match");
-        }
     }
 
 }
