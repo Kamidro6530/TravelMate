@@ -3,6 +3,7 @@ package com.example.services;
 import com.example.model.User;
 import com.example.model.repositories.RoleRepository;
 import com.example.model.repositories.UserRepository;
+import errors.UserAlreadyExistException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,21 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+
+    @Override
+    public User registerNewUserAccount(User user) throws UserAlreadyExistException {
+       if (emailExists(user.getEmail())){
+           throw new UserAlreadyExistException("There is an account with that email address: "
+                   + user.getEmail());
+       }
+
+       return userRepository.save(user);
+    }
+
     @Override
     public User save(User user) {
          user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         return userRepository.save(user);
     }
 
@@ -65,4 +78,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByLastName(lastname);
     }
 
+    private boolean emailExists(String email){
+        return userRepository.findByEmail(email) != null;
+    }
 }

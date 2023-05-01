@@ -28,9 +28,9 @@ public class AuthController {
     @PostMapping("register/save")
     public String registrationNewUser(@Valid User user, BindingResult result){
         if (result.hasErrors()){
-            return "error";
+            return "redirect:/register";
         }else {
-            User savedUser = userService.save(user);
+            userService.registerNewUserAccount(user);
             return "redirect:/index";
         }
     }
