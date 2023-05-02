@@ -1,6 +1,8 @@
 package com.example.services;
 
 import com.example.model.User;
+import com.example.model.authorization.EnumRole;
+import com.example.model.authorization.Role;
 import com.example.model.repositories.RoleRepository;
 import com.example.model.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +31,8 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setConfirmPassword(passwordEncoder.encode(user.getConfirmPassword()));
+        Role userRole = Role.builder().name(EnumRole.USER.name()).build();
+        user.setRoles(Set.of(userRole));
         return userRepository.save(user);
     }
 

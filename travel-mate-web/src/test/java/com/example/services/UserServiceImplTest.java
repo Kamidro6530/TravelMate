@@ -31,12 +31,14 @@ class UserServiceImplTest {
     @Mock
     RoleRepository roleRepository;
     @Mock
-    PasswordEncoder passwordEncoder;
+    public PasswordEncoder passwordEncoder;
     @InjectMocks
     UserServiceImpl userService;
 
     public static final String FIRST_NAME = "TEST";
     public static final Long ID = 1L;
+    public static final String CODED_PASSWORD = "########";
+
 
     User returnUser;
 
@@ -48,14 +50,25 @@ class UserServiceImplTest {
     void setUp() {
         returnRole = Role.builder().name(EnumRole.USER.name()).build();
         returnUserDto = UserDto.builder().firstName(FIRST_NAME).build();
-        returnUser = User.builder().firstName(FIRST_NAME).id(ID).roles(Set.of(returnRole)).build();
+        returnUser = User.builder()
+                .firstName(FIRST_NAME)
+                .id(ID)
+                .roles(Set.of(returnRole))
+                .build();
     }
 
     @Test
     void save() {
         userService.save(returnUser);
         verify(userRepository,times(1)).save(any(User.class));
+    }
 
+    @Test
+    void savedUserPasswordShouldBeCoded(){
+        when(passwordEncoder.encode(any())).thenReturn(CODED_PASSWORD);
+        returnUser.setPassword(passwordEncoder.encode("Password"));
+        assertNotNull(returnUser.getPassword());
+        assertEquals(CODED_PASSWORD,returnUser.getPassword());
     }
 
     @Test
