@@ -1,12 +1,15 @@
-package com.example.model.repositories;
+package com.example.services.destination;
 
 import com.example.model.Destination;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.services.CrudService;
 
-public interface DestinationRepository extends JpaRepository<Destination,Long> {
+public interface DestinationService extends CrudService<Destination,Long> {
 
     Destination findByName(String name);
+
     Destination findByCountry(String country);
+
     Destination findByDescription(String description);
+
     Destination findByCurrency(String currency);
 }
