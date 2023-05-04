@@ -30,7 +30,8 @@ class UserServiceImplTest {
     @Mock
     RoleRepository roleRepository;
     @Mock
-    public PasswordEncoder passwordEncoder;
+     PasswordEncoder passwordEncoder;
+
     @InjectMocks
     UserServiceImpl userService;
 
@@ -60,6 +61,7 @@ class UserServiceImplTest {
     void save() {
         userService.save(returnUser);
         verify(userRepository,times(1)).save(any(User.class));
+
     }
 
     @Test
