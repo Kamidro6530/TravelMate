@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -83,14 +82,13 @@ class UserServiceImplTest {
     void findAll() {
         User user1 =  User.builder().firstName("User1").id(1L).build();
         User user2 = User.builder().firstName("User2").id(2L).build();
-
         when(userRepository.findAll()).thenReturn(List.of(user1,user2));
 
         List<User> users = userService.findAll().stream().toList();
 
         assertNotNull(users);
         assertEquals(2,users.size());
-        assertEquals(user2,users.get(1));
+        assertTrue(users.containsAll(List.of(user1,user2)));
     }
 
     @Test

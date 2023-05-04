@@ -5,7 +5,7 @@ import org.springframework.validation.Errors;
 
 public interface UserValidateService {
 
-    void validatePasswords(User user, Errors errors);
+    String validatePasswords(User user, Errors errors);
 
-    void validateEmailExist(User user, Errors errors);
+    String validateEmailExist(User user, Errors errors);
 }

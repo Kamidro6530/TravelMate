@@ -14,18 +14,21 @@ public class UserValidateServiceImpl implements UserValidateService{
     }
 
     @Override
-    public void validatePasswords(User user, Errors errors) {
+    public String validatePasswords(User user, Errors errors) {
             if (!user.getPassword().equals(user.getConfirmPassword())) {
-                errors.rejectValue("confirmPassword", "password.mismatch", "Passwords do not match");
-            }
+                errors.rejectValue("confirmPassword", "password.mismatch",
+                        "Passwords do not match");
 
+            }
+        return errors.toString();
     }
 
     @Override
-    public void validateEmailExist(User user, Errors errors) {
+    public String validateEmailExist(User user, Errors errors) {
             if (userService.findUserByEmail(user.getEmail()) != null) {
                 errors.rejectValue("email", "email.alreadyExist",
                         ("There is an account with that email address: " + user.getEmail()));
             }
+            return errors.toString();
     }
 }
