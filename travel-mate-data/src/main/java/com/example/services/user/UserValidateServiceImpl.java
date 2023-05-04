@@ -1,11 +1,11 @@
-package com.example.services;
+package com.example.services.user;
 
 import com.example.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
 @Service
-public class UserValidateServiceImpl implements UserValidateService{
+public class UserValidateServiceImpl implements UserValidateService {
 
     private final UserService userService;
 

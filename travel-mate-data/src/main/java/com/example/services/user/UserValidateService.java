@@ -1,4 +1,4 @@
-package com.example.services;
+package com.example.services.user;
 
 import com.example.model.User;
 import org.springframework.validation.Errors;

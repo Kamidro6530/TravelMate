@@ -1,6 +1,6 @@
 package com.example.model.dto;
 
-import com.example.model.Itineraries;
+import com.example.model.Itinerary;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -20,12 +20,12 @@ public class UserDto extends BaseDto{
 
     private String username;
 
-    private Set<Itineraries> itineraries;
+    private Set<Itinerary> itineraries;
 
 
     @Builder
     public UserDto(Long id,String username,String firstName,String lastName,
-                String email,LocalDate birthDate,Set<Itineraries> itineraries){
+                String email,LocalDate birthDate,Set<Itinerary> itineraries){
         super(id);
         this.username = username;
         this.firstName = firstName;

@@ -1,8 +1,8 @@
 package com.example.controllers;
 
 import com.example.model.User;
-import com.example.services.UserService;
-import com.example.services.UserValidateService;
+import com.example.services.user.UserService;
+import com.example.services.user.UserValidateService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

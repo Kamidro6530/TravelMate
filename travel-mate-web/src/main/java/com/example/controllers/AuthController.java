@@ -1,8 +1,8 @@
 package com.example.controllers;
 
 import com.example.model.User;
-import com.example.services.UserService;
-import com.example.services.UserValidateService;
+import com.example.services.user.UserService;
+import com.example.services.user.UserValidateService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

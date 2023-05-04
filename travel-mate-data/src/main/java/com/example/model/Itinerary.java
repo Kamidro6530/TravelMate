@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "itineraries")
-public class Itineraries extends BaseEntity {
+public class Itinerary extends BaseEntity {
 
 
     @ManyToOne

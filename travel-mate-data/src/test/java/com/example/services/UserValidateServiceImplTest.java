@@ -1,6 +1,8 @@
 package com.example.services;
 
 import com.example.model.User;
+import com.example.services.user.UserServiceImpl;
+import com.example.services.user.UserValidateServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -57,13 +59,14 @@ public class UserValidateServiceImplTest {
         returnUser.setConfirmPassword("TWO");
         // when
         userValidateService.validatePasswords(returnUser, errors);
-
         // then
         ArgumentCaptor<String> fieldCaptor = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<String> codeCaptor = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<String> messageCaptor = ArgumentCaptor.forClass(String.class);
+
         verify(errors,times(1)).rejectValue(anyString(),anyString(),anyString());
         verify(errors).rejectValue(fieldCaptor.capture(), codeCaptor.capture(), messageCaptor.capture());
+
         assertEquals(fieldCaptor.getValue(),"confirmPassword");
         assertEquals(codeCaptor.getValue(),"password.mismatch");
         assertEquals(messageCaptor.getValue(),"Passwords do not match");
@@ -94,10 +97,8 @@ public class UserValidateServiceImplTest {
     public void validateEmailExist_emailDoesNotExist_noErrors() {
         // given
         when(userService.findUserByEmail(any())).thenReturn(null);
-
         // when
         userValidateService.validateEmailExist(returnUser, errors);
-
         // then
         verify(errors, never()).rejectValue(anyString(), anyString(), anyString());
     }

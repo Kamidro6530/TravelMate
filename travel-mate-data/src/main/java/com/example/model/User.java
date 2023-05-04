@@ -41,7 +41,7 @@ public class User extends BaseEntity {
     private LocalDate birthDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Itineraries> itineraries = new HashSet<Itineraries>();
+    private Set<Itinerary> itineraries = new HashSet<Itinerary>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_role",
@@ -51,7 +51,7 @@ public class User extends BaseEntity {
 
     @Builder
     public User(Long id,String username,String firstName,String lastName,
-                String email,String password,String confirmPassword,LocalDate birthDate,Set<Itineraries> itineraries,Set<Role> roles){
+                String email,String password,String confirmPassword,LocalDate birthDate,Set<Itinerary> itineraries,Set<Role> roles){
         super(id);
         this.username = username;
         this.firstName = firstName;
