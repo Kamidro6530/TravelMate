@@ -1,12 +1,10 @@
-package com.example.services;
+package com.example.services.user;
 
 import com.example.model.User;
 import com.example.model.authorization.EnumRole;
 import com.example.model.authorization.Role;
-import com.example.model.dto.UserDto;
 import com.example.model.repositories.RoleRepository;
 import com.example.model.repositories.UserRepository;
-import com.example.services.user.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,21 +34,18 @@ class UserServiceImplTest {
     @InjectMocks
     UserServiceImpl userService;
 
-    public static final String FIRST_NAME = "TEST";
-    public static final Long ID = 1L;
-    public static final String CODED_PASSWORD = "########";
+    private static final String FIRST_NAME = "TEST";
+    private static final Long ID = 1L;
+    private static final String CODED_PASSWORD = "########";
 
 
     User returnUser;
-
-    UserDto returnUserDto;
 
     Role returnRole;
 
     @BeforeEach
     void setUp() {
         returnRole = Role.builder().name(EnumRole.USER.name()).build();
-        returnUserDto = UserDto.builder().firstName(FIRST_NAME).build();
         returnUser = User.builder()
                 .firstName(FIRST_NAME)
                 .id(ID)
