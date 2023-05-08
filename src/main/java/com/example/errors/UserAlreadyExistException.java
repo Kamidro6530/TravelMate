@@ -1,4 +1,4 @@
-package errors;
+package com.example.errors;
 
 public final class UserAlreadyExistException extends RuntimeException {
 
