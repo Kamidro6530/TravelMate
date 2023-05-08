@@ -10,7 +10,9 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto extends BaseDto{
+public class UserDto {
+
+    private  Long id;
 
     private String firstName;
 
@@ -26,7 +28,7 @@ public class UserDto extends BaseDto{
     @Builder
     public UserDto(Long id,String username,String firstName,String lastName,
                 String email,LocalDate birthDate,Set<Itinerary> itineraries){
-        super(id);
+        this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

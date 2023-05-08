@@ -1,11 +1,7 @@
 package com.example.model.authorization;
 
-import com.example.model.BaseEntity;
 import com.example.model.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
@@ -17,7 +13,11 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "roles")
-public class Role extends BaseEntity {
+public class Role {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false,unique = true)
     private String name;

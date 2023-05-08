@@ -14,9 +14,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "itineraries")
-public class Itinerary extends BaseEntity {
+public class Itinerary {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

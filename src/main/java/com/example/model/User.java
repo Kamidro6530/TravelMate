@@ -16,10 +16,15 @@ import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+public class User {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "username")
     private String username;
     @Column(name = "first_name")
@@ -48,21 +53,5 @@ public class User extends BaseEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
-    @Builder
-    public User(Long id,String username,String firstName,String lastName,
-                String email,String password,String confirmPassword,LocalDate birthDate,Set<Itinerary> itineraries,Set<Role> roles){
-        super(id);
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.birthDate = birthDate;
-        this.itineraries = itineraries;
-        this.roles = roles;
-
-    }
 
 }
