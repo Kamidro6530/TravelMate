@@ -8,39 +8,36 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <style>
         body { margin: 0; padding: 0; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        #map { position: absolute; top: 0; bottom: 50px; width: 100%; }
+        #button { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); padding: 10px 20px; background-color: #008CBA; color: white; font-size: 16px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
-<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
-
-<style>
-    #geocoder-container > div {
-        min-width: 50%;
-        margin-left: 25%;
-    }
-</style>
 <div id="map"></div>
+<div id="button">
+    <a href="#" id="confirmButton">Potwierdź cel</a>
+</div>
 
 <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuaWVsNjUzMCIsImEiOiJjbGhoZDYzbmIwN2plM2ZsOTN5dmgyczRkIn0.GiHklVEBg9zBwJyVhVE4Pg';
     const map = new mapboxgl.Map({
         container: 'map',
-// Choose from Mapbox's core styles, or make your own style with Mapbox Studio
         style: 'mapbox://styles/mapbox/streets-v12',
         center: [-79.4512, 43.6568],
         zoom: 13
     });
+    var coordinates;
+    map.on('click', function(e) {
+        coordinates = e.lngLat;
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML('you clicked here: <br/>' + coordinates)
+            .addTo(map);
+    });
 
-    map.on('style.load', function() {
-        map.on('click', function(e) {
-            var coordinates = e.lngLat;
-            new mapboxgl.Popup()
-                .setLngLat(coordinates)
-                .setHTML('you clicked here: <br/>' + coordinates)
-                .addTo(map);
-        });
+    document.getElementById('confirmButton').addEventListener('click', function() {
+        // Przekierowanie do następnego ekranu (zmień "URL_NASTEPUJACEGO_EKRANU" na właściwy adres URL)
+        window.location.href = '/options?lng=' + coordinates.lng + '&lat=' + coordinates.lat;
     });
 
     const geocoder = new MapboxGeocoder({
@@ -48,12 +45,8 @@
         marker: {
             color: 'orange'
         },
-
         mapboxgl: mapboxgl
-
-
     });
-
 
     map.addControl(geocoder);
 </script>
